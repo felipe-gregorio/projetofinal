@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+//Classe que representa um objeto Tarefa
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Tarefa {

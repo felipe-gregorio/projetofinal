@@ -10,6 +10,7 @@ import javax.jws.WebService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
+//Interface que define os métodos que o web service irá expor
 @WebService
 public interface GerenciadorTarefasWebService {
 
