@@ -8,7 +8,7 @@ import javax.jws.WebService;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebService(endpointInterface = "gerenciadortarefas.GerenciadorTarefasWebService")
+@WebService(endpointInterface = "br.GerenciadorTarefasWebService")
 public class GerenciadorTarefasResource implements GerenciadorTarefasWebService {
     private List<String> tarefas;
 
