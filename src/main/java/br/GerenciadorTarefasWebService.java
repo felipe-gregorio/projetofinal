@@ -4,6 +4,7 @@ package br;
  *
  * @author felps
  */
+
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.ws.rs.*;
@@ -28,4 +29,10 @@ public interface GerenciadorTarefasWebService {
     @Path("/listarTarefas")
     @Produces(MediaType.TEXT_PLAIN)
     String listarTarefas();
+    
+    @WebMethod
+    @POST
+    @Path("/adicionarTarefaComData")
+    @Consumes(MediaType.APPLICATION_JSON)
+    void adicionarTarefaComData(Tarefa tarefa);
 }

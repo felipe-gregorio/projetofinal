@@ -10,33 +10,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GerenciadorTarefasImpl extends UnicastRemoteObject implements GerenciadorTarefas {
-    private List<String> tarefas;
+    private List<Tarefa> tarefas;
 
     public GerenciadorTarefasImpl() throws RemoteException {
         super();
         tarefas = new ArrayList<>();
     }
 
+    @Override
     public void adicionarTarefa(String descricao) throws RemoteException {
-        tarefas.add(descricao);
+        Tarefa tarefa = new Tarefa(descricao);
+        tarefas.add(tarefa);
         System.out.println("Tarefa adicionada: " + descricao);
     }
 
+    @Override
     public void removerTarefa(int id) throws RemoteException {
         if (id >= 0 && id < tarefas.size()) {
-            String descricao = tarefas.remove(id);
+            Tarefa descricao = tarefas.remove(id);
             System.out.println("Tarefa removida: " + descricao);
         } else {
             System.out.println("ID de tarefa inválido");
         }
     }
 
+    @Override
     public String listarTarefas() throws RemoteException {
         StringBuilder sb = new StringBuilder();
         sb.append("Lista de Tarefas:\n");
         for (int i = 0; i < tarefas.size(); i++) {
-            sb.append(i).append(": ").append(tarefas.get(i)).append("\n");
+            Tarefa tarefa = tarefas.get(i);
+            sb.append(i).append(": ").append(tarefa.getDescricao()).append("\n");
         }
         return sb.toString();
     }
+    
+    
 }

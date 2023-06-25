@@ -1,6 +1,5 @@
 br\GerenciadorTarefasImpl.class
 br\GerenciadorTarefas.class
 br\Servidor.class
-br\GerenciadorTarefasResource.class
 br\GerenciadorTarefasWebService.class
 br\Cliente.class

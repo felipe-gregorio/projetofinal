@@ -4,13 +4,14 @@ package br;
  *
  * @author felps
  */
+import java.text.SimpleDateFormat;
 import javax.jws.WebService;
 import java.util.ArrayList;
 import java.util.List;
 
 @WebService(endpointInterface = "br.GerenciadorTarefasWebService")
 public class GerenciadorTarefasResource implements GerenciadorTarefasWebService {
-    private List<String> tarefas;
+    private List<Tarefa> tarefas;
 
     public GerenciadorTarefasResource() {
         tarefas = new ArrayList<>();
@@ -18,7 +19,8 @@ public class GerenciadorTarefasResource implements GerenciadorTarefasWebService 
 
     @Override
     public void adicionarTarefa(String descricao) {
-        tarefas.add(descricao);
+        Tarefa tarefa = new Tarefa(descricao);
+        tarefas.add(tarefa);
     }
 
     @Override
@@ -30,10 +32,18 @@ public class GerenciadorTarefasResource implements GerenciadorTarefasWebService 
 
     @Override
     public String listarTarefas() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tarefas.size(); i++) {
-            sb.append(i).append(". ").append(tarefas.get(i)).append("\n");
-        }
-        return sb.toString();
+            Tarefa tarefa = tarefas.get(i);
+            sb.append(i).append(". ").append(tarefa.getDescricao())
+            .append(" (Data: ").append(dateFormat.format(tarefa.getData())).append(")\n");
+    }
+    return sb.toString();
+}
+
+    @Override
+    public void adicionarTarefaComData(Tarefa tarefa) {
+        tarefas.add(tarefa);
     }
 }
