@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
+//Implementação da interface Gerenciador
 public class GerenciadorTarefasImpl extends UnicastRemoteObject implements GerenciadorTarefas {
+
     private List<Tarefa> tarefas;
     private ReentrantLock lock;
 
@@ -21,7 +23,7 @@ public class GerenciadorTarefasImpl extends UnicastRemoteObject implements Geren
     }
 
     @Override
-    public void adicionarTarefa(String descricao) throws RemoteException {
+    public synchronized void adicionarTarefa(String descricao) throws RemoteException {
         lock.lock();
         try {
             Tarefa tarefa = new Tarefa(descricao);
@@ -33,22 +35,28 @@ public class GerenciadorTarefasImpl extends UnicastRemoteObject implements Geren
     }
 
     @Override
-    public void removerTarefa(int id) throws RemoteException {
+    public synchronized boolean removerTarefa(int id) throws RemoteException {
         lock.lock();
         try {
             if (id >= 0 && id < tarefas.size()) {
-                Tarefa descricao = tarefas.remove(id);
-                System.out.println("Tarefa removida: " + descricao);
+                Tarefa tarefaRemovida = tarefas.get(id);
+                tarefas.remove(id);
+                System.out.println("Tarefa removida: " + tarefaRemovida.getDescricao());
+                return true;
             } else {
                 System.out.println("ID de tarefa inválido");
+                return false;
             }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("ID de tarefa inválido");
+            return false;
         } finally {
             lock.unlock();
         }
     }
 
     @Override
-    public String listarTarefas() throws RemoteException {
+    public synchronized String listarTarefas() throws RemoteException {
         lock.lock();
         try {
             StringBuilder sb = new StringBuilder();

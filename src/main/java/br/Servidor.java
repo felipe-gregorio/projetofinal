@@ -22,11 +22,13 @@ public class Servidor {
             // Configuração do WebService
             String address = "http://localhost:8080/gerenciadortarefas";
             Endpoint.publish(address, new GerenciadorTarefasResource());
-
-            System.out.println("Servidor iniciado");
+            
+            System.out.println();
+            System.out.println("====== SERVIDOR INICIADO ======");
         } catch (RemoteException e) {
             System.out.println("Erro ao iniciar o servidor: " + e.getMessage());
             System.out.println(e);
         }
     }
 }
+    

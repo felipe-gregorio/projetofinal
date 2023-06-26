@@ -15,14 +15,19 @@ public class Cliente {
 
     public static void main(String[] args) {
         try {
+            //URL do WSDL do serviço web
             URL url = new URL("http://localhost:8080/gerenciadortarefas?wsdl");
+            //Nome do serviço e da porta definidos no WSDL
             QName qname = new QName("http://br/", "GerenciadorTarefasResourceService");
             QName qnametmp = new QName("http://br/", "GerenciadorTarefasResourcePort");
+            //Criação do serviço a partir da URL e do nome do serviço
             Service service = Service.create(url, qname);
-            
+
+            //Obtenção do proxy para serviço web
             GerenciadorTarefasWebService gerenciadorTarefas = service.getPort(qnametmp,
                     GerenciadorTarefasWebService.class);
 
+            //criação do menu de opções
             Scanner scanner = new Scanner(System.in);
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             while (true) {
@@ -58,9 +63,13 @@ public class Cliente {
                     case "2":
                         System.out.println("Digite o ID da tarefa a ser removida:");
                         int id = scanner.nextInt();
-                        gerenciadorTarefas.removerTarefa(id);
-                        System.out.println("<<<<Tarefa removida com sucesso!>>>>");
                         scanner.nextLine();
+                        boolean tarefaRemovida = gerenciadorTarefas.removerTarefa(id);
+                        if (tarefaRemovida) {
+                            System.out.println("<<<<Tarefa removida com sucesso!>>>>");
+                        } else {
+                            System.out.println("Falha ao remover a tarefa. Verifique o ID da tarefa.");
+                        }
                         break;
                     case "3":
                         System.out.println("Listagem de Tarefas:\n");

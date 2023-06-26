@@ -9,6 +9,7 @@ import javax.jws.WebService;
 import java.util.ArrayList;
 import java.util.List;
 
+//Implementação do web service SOAP
 @WebService(endpointInterface = "br.GerenciadorTarefasWebService")
 public class GerenciadorTarefasResource implements GerenciadorTarefasWebService {
     private List<Tarefa> tarefas;
@@ -24,9 +25,12 @@ public class GerenciadorTarefasResource implements GerenciadorTarefasWebService 
     }
 
     @Override
-    public void removerTarefa(int id) {
+    public boolean removerTarefa(int id) {
         if (id >= 0 && id < tarefas.size()) {
             tarefas.remove(id);
+            return true;
+        }else{
+            return false;
         }
     }
 

@@ -10,7 +10,7 @@ import javax.jws.WebService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-//Interface que define os métodos que o web service irá expor
+//Interface do web service 
 @WebService
 public interface GerenciadorTarefasWebService {
 
@@ -23,7 +23,7 @@ public interface GerenciadorTarefasWebService {
     @WebMethod
     @DELETE
     @Path("/removerTarefa/{id}")
-    void removerTarefa(@PathParam("id") int id);
+    boolean removerTarefa(@PathParam("id") int id);
 
     @WebMethod
     @GET
@@ -37,3 +37,5 @@ public interface GerenciadorTarefasWebService {
     @Consumes(MediaType.APPLICATION_JSON)
     void adicionarTarefaComData(Tarefa tarefa);
 }
+
+
